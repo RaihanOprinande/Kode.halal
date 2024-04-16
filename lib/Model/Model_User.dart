@@ -1,25 +1,25 @@
 // To parse this JSON data, do
 //
-//     final edukasi = edukasiFromJson(jsonString);
+//     final user = userFromJson(jsonString);
 
 import 'dart:convert';
 
-Edukasi edukasiFromJson(String str) => Edukasi.fromJson(json.decode(str));
+User userFromJson(String str) => User.fromJson(json.decode(str));
 
-String edukasiToJson(Edukasi data) => json.encode(data.toJson());
+String userToJson(User data) => json.encode(data.toJson());
 
-class Edukasi {
+class User {
   bool isSuccess;
   String message;
   List<Datum> data;
 
-  Edukasi({
+  User({
     required this.isSuccess,
     required this.message,
     required this.data,
   });
 
-  factory Edukasi.fromJson(Map<String, dynamic> json) => Edukasi(
+  factory User.fromJson(Map<String, dynamic> json) => User(
     isSuccess: json["isSuccess"],
     message: json["message"],
     data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
@@ -34,29 +34,36 @@ class Edukasi {
 
 class Datum {
   String id;
-  String judul;
-  String berita;
-  String gambar;
+  String nama;
+  String username;
+  String password;
+  String email;
+  String nohp;
 
   Datum({
     required this.id,
-    required this.judul,
-    required this.berita,
-    required this.gambar,
+    required this.nama,
+    required this.username,
+    required this.password,
+    required this.email,
+    required this.nohp,
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     id: json["id"],
-    judul: json["judul"],
-    berita: json["berita"],
-    gambar: json["gambar"],
+    nama: json["nama"],
+    username: json["username"],
+    password: json["password"],
+    email: json["email"],
+    nohp: json["nohp"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "judul": judul,
-    "berita": berita,
-    "gambar": gambar,
+    "nama": nama,
+    "username": username,
+    "password": password,
+    "email": email,
+    "nohp": nohp,
   };
-
 }

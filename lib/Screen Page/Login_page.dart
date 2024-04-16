@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
         isLoading = true;
       });
 
-      http.Response response = await http.post(Uri.parse('http://192.168.1.3/edukasi_server/login.php'),
+      http.Response response = await http.post(Uri.parse('http://192.168.1.185/edukasi_server/login.php'),
           body: {
             "username": txtUsername.text,
             "password": txtPassword.text,

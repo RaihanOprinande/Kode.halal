@@ -1,4 +1,6 @@
 import 'package:demouas/Screen%20Page/Bottom_Navigation_Page.dart';
+import 'package:demouas/Screen%20Page/List_Edukasi_Page.dart';
+import 'package:demouas/Screen%20Page/Login_page.dart';
 import 'package:demouas/Screen%20Page/Page%20Beranda.dart';
 import 'package:demouas/Screen%20Page/Register_Page.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const PageRegister(),
+      home: const PageBottomNavigationBar(),
     );
   }
 }

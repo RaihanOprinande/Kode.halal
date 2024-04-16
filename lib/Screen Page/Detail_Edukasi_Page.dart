@@ -10,7 +10,7 @@ class DetailEdukasi extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Detail Berita"),
+        title: const Text("Detail Edukasi"),
         backgroundColor: Colors.green,
       ),
       body: ListView(
@@ -21,7 +21,7 @@ class DetailEdukasi extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
-                "http://192.168.1.3/edukasi_server/gambar_berita/${data?.berita}",
+                "http://192.168.43.109/edukasi_server/gambar_berita/${data?.gambar}",
                 fit: BoxFit.fill,
               ),
             ),

@@ -1,7 +1,10 @@
 import 'package:demouas/Screen%20Page/Gambar_Page.dart';
 import 'package:demouas/Screen%20Page/List_Edukasi_Page.dart';
+import 'package:demouas/Screen%20Page/Page_user.dart';
 import 'package:demouas/Screen%20Page/Register_Page.dart';
 import 'package:flutter/material.dart';
+
+import 'Page_Pegawai.dart';
 
 
 class PageBottomNavigationBar extends StatefulWidget {
@@ -19,7 +22,7 @@ class _PageBottomNavigationBarState extends State<PageBottomNavigationBar>
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 3, vsync: this);
+    tabController = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -27,7 +30,7 @@ class _PageBottomNavigationBarState extends State<PageBottomNavigationBar>
     return Scaffold(
       body: TabBarView(
         controller: tabController,
-        children: const [PageListEdukasi(),PageGambar() ,PageRegister() ],
+        children: const [PageUser(),PageListEdukasi(),PageGambar() ,PagePegawai() ],
       ),
       bottomNavigationBar: BottomAppBar(
         child: TabBar(
@@ -45,7 +48,11 @@ class _PageBottomNavigationBarState extends State<PageBottomNavigationBar>
               icon: Icon(Icons.grid_3x3),
             ),
             Tab(
-              text: "Register",
+              text: "Gambar",
+              icon: Icon(Icons.search),
+            ),
+            Tab(
+              text: "Pegawai",
               icon: Icon(Icons.search),
             ),
           ],

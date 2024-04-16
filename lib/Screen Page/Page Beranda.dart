@@ -9,11 +9,6 @@ class PageBeranda extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: const Text('Projek MI 2C'),
-        centerTitle: true,
-      ),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
