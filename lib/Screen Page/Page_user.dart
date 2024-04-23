@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../Utils/Session_Manager.dart';
-import 'Login_page.dart';
 
 class PageUser extends StatefulWidget {
   const PageUser({super.key});
@@ -12,41 +11,33 @@ class PageUser extends StatefulWidget {
 
 class _PageUserState extends State<PageUser> {
 
-  String? userName;
+  String? userName, name, email;
 
-  Future getDataSession() async {
-    await Future.delayed(const Duration(seconds: 1), () {
-      session.getSession().then((value) {
-        print('data sesi .. ' + value.toString());
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getDataSession();
+  }
+
+  //untuk mendapatkan sesi
+  Future getDataSession() async{
+    await Future.delayed(const Duration(seconds: 5),(){
+      session.getSession().then((value){
+        print('Data sesi ..'+ value.toString());
         userName = session.userName;
       });
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Edukasi List'),
-        backgroundColor: Colors.green,
-        actions: [
-          TextButton(onPressed: () {}, child: Text('HI ${userName}')),
-          //logout
-          IconButton(
-            onPressed: () {
-              //clear session
-              setState(() {
-                session.clearSession();
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                        (route) => false);
-              });
-            },
-            icon: Icon(Icons.exit_to_app),
-            tooltip: 'Logout',
-          )
-        ],
+      body: Center(
+        child: Text(
+          'username = ${userName}'
+        ),
       ),
     );
   }

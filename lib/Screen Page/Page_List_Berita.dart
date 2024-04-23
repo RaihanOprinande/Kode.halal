@@ -1,22 +1,22 @@
-import 'package:demouas/Model/Model_Update_Pegawai.dart';
-import 'package:demouas/Screen%20Page/Add_Pegawai.dart';
-import 'package:demouas/Screen%20Page/Update_Pegawai_Page.dart';
+import 'package:demouas/Screen%20Page/Page_Detail_Berita.dart';
+import 'package:demouas/Screen%20Page/Page_user.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../Model/Model_Pegawai.dart';
+import '../Model/Model_berita.dart';
 import '../Utils/Session_Manager.dart';
+import 'Detail_Edukasi_Page.dart';
 import 'Login_page.dart';
 
-class PagePegawai extends StatefulWidget {
-  const PagePegawai({super.key});
+
+class PageBerita extends StatefulWidget {
+  const PageBerita({super.key});
 
   @override
-  State<PagePegawai> createState() => _PagePegawaiState();
+  State<PageBerita> createState() => _PageBeritaState();
 }
 
-class _PagePegawaiState extends State<PagePegawai> {
-
+class _PageBeritaState extends State<PageBerita> {
   String? userName;
   String? id;
 
@@ -40,8 +40,8 @@ class _PagePegawaiState extends State<PagePegawai> {
   Future<List<Datum>?> getBerita() async {
     try {
       http.Response response = await http
-          .get(Uri.parse("http://192.168.1.3/edukasi_server/getPegawai.php"));
-      return pegawaiFromJson(response.body).data;
+          .get(Uri.parse("http://192.168.43.109/edukasi/getBerita.php"));
+      return beritaFromJson(response.body).data;
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -64,7 +64,10 @@ class _PagePegawaiState extends State<PagePegawai> {
         title: Text('Edukasi List'),
         backgroundColor: Colors.green,
         actions: [
-          TextButton(onPressed: () {}, child: Text('HI ${id}')),
+          TextButton(onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (_) => PageUser()));
+          }, child: Text('HI ${userName}')),
           //logout
           IconButton(
             onPressed: () {
@@ -90,10 +93,10 @@ class _PagePegawaiState extends State<PagePegawai> {
               setState(() {
                 filterDevice = listDevice
                     ?.where((element) =>
-                element.nama!
+                element.judul!
                     .toLowerCase()
                     .contains(value.toLowerCase()) ||
-                    element.nobp!
+                    element.judul!
                         .toLowerCase()
                         .contains(value.toLowerCase()))
                     .toList();
@@ -102,24 +105,6 @@ class _PagePegawaiState extends State<PagePegawai> {
             decoration: InputDecoration(
               hintText: "Search",
               prefixIcon: Icon(Icons.search),
-            ),
-          ),
-          SizedBox(height: 15,),
-          MaterialButton(onPressed: (){
-            Navigator.push(context,
-                MaterialPageRoute(builder:
-                (_) => addpegawais()));
-          },
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            color: Color(0xff333333),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(40)
-            ),
-            child: Text(
-              'Tambah Pegawai',
-              style: TextStyle(
-                color: Colors.white
-              ),
             ),
           ),
           Padding(
@@ -143,11 +128,11 @@ class _PagePegawaiState extends State<PagePegawai> {
                           padding: const EdgeInsets.all(10),
                           child: GestureDetector(
                             onTap: () {
-                                //ini untuk ke detail
+                              //   //ini untuk ke detail
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => pegawaiupdate()));
+                                      builder: (_) => detailberita(data: data)));
                             },
                             child: Card(
                               child: Column(
@@ -157,48 +142,25 @@ class _PagePegawaiState extends State<PagePegawai> {
                                     padding: const EdgeInsets.all(4),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        'http://192.168.43.109/edukasi/gambar_berita/${data?.gambar}',
+                                        fit: BoxFit.fill,
+                                      ),
                                     ),
                                   ),
                                   ListTile(
                                     title: Text(
-                                      "${data?.nama}",
+                                      "${data?.judul}",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: Colors.orange,
                                           fontSize: 18),
                                     ),
-                                    subtitle: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text("${data?.nobp}",
-                                          maxLines: 2,
-                                          style: TextStyle(
-                                              fontSize: 12, color: Colors.black),
-                                        ),
-                                        Text("${data?.nama}",
-                                          maxLines: 2,
-                                          style: TextStyle(
-                                              fontSize: 12, color: Colors.black),
-                                        ),
-                                        Text("${data?.nohp}",
-                                          maxLines: 2,
-                                          style: TextStyle(
-                                              fontSize: 12, color: Colors.black),
-                                        ),
-                                        Text("${data?.email}",
-                                          maxLines: 2,
-                                          style: TextStyle(
-                                              fontSize: 12, color: Colors.black),
-                                        ),
-                                        Text("${data?.tanggalInput}",
-                                          maxLines: 2,
-                                          style: TextStyle(
-                                              fontSize: 12, color: Colors.black),
-                                        ),
-
-                                      ]
-
+                                    subtitle: Text(
+                                      "${data?.konten}",
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                          fontSize: 12, color: Colors.black),
                                     ),
                                   ),
                                 ],

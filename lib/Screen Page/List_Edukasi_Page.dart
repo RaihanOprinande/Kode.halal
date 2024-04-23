@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:demouas/Model/Model_Edukasi.dart';
 import 'package:demouas/Screen%20Page/Detail_Edukasi_Page.dart';
 import 'package:demouas/Screen%20Page/Login_page.dart';
@@ -9,18 +11,24 @@ import '../Utils/Session_Manager.dart';
 class PageListEdukasi extends StatefulWidget {
   const PageListEdukasi({super.key});
 
+
+
   @override
   State<PageListEdukasi> createState() => _PageListEdukasiState();
 }
 
+
+
 class _PageListEdukasiState extends State<PageListEdukasi> {
   String? userName;
+  String? id;
 
   Future getDataSession() async {
     await Future.delayed(const Duration(seconds: 1), () {
       session.getSession().then((value) {
         print('data sesi .. ' + value.toString());
         userName = session.userName;
+        id = session.idUser;
       });
     });
   }
@@ -35,7 +43,7 @@ class _PageListEdukasiState extends State<PageListEdukasi> {
   Future<List<Datum>?> getBerita() async {
     try {
       http.Response response = await http
-          .get(Uri.parse("http://192.168.1.3/edukasi_server/getBerita.php"));
+          .get(Uri.parse("http://192.168.43.109/edukasi_server/getBerita.php"));
       return edukasiFromJson(response.body).data;
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -135,8 +143,7 @@ class _PageListEdukasiState extends State<PageListEdukasi> {
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
                                       child: Image.network(
-                                        'http://192.168.1.3/edukasi_server/gambar_berita/${data
-                                            ?.gambar}',
+                                        'http://192.168.43.109/edukasi_server/gambar_berita/${data?.gambar}',
                                         fit: BoxFit.fill,
                                       ),
                                     ),

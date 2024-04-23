@@ -30,33 +30,28 @@ class _PageBottomNavigationBarState extends State<PageBottomNavigationBar>
     return Scaffold(
       body: TabBarView(
         controller: tabController,
-        children: const [PageUser(),PageListEdukasi(),PageGambar() ,PagePegawai() ],
+        children: const [PageListEdukasi(), PageUser(), ],
       ),
       bottomNavigationBar: BottomAppBar(
-        child: TabBar(
-          isScrollable: true,
-          labelColor: Colors.black,
-          unselectedLabelColor: Colors.grey,
-          controller: tabController,
-          tabs: const [
-            Tab(
-              text: "User",
-              icon: Icon(Icons.input),
-            ),
-            Tab(
-              text: "List Berita",
-              icon: Icon(Icons.grid_3x3),
-            ),
-            Tab(
-              text: "Gambar",
-              icon: Icon(Icons.search),
-            ),
-            Tab(
-              text: "Pegawai",
-              icon: Icon(Icons.search),
-            ),
-          ],
-        ),
+          child: TabBar(
+            isScrollable: true,
+            labelColor: Colors.black,
+            unselectedLabelColor: Colors.grey,
+            controller: tabController,
+            tabAlignment: TabAlignment.center,
+            tabs: const [
+              Tab(
+                text: "Berita",
+                icon: Icon(Icons.input),
+              ),
+              Tab(
+                text: "User",
+                icon: Icon(Icons.grid_3x3),
+              ),
+            ],
+          ),
+
+
       ),
     );
   }

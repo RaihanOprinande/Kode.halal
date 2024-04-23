@@ -1,43 +1,40 @@
+import 'package:demouas/Model/Model_Login2.dart';
 import 'package:demouas/Screen%20Page/Bottom_Navigation_Page.dart';
-import 'package:demouas/Screen%20Page/Page_List_Berita.dart';
-import 'package:demouas/Screen%20Page/Register_Page.dart';
-import 'package:demouas/Screen%20Page/List_Edukasi_Page.dart';
+import 'package:demouas/Screen%20Page/Page_Register2.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../Model/Model_Login.dart';
 import '../Utils/Session_Manager.dart';
+import 'Page_List_Berita.dart';
 
-
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class loginpage2 extends StatefulWidget {
+  const loginpage2({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<loginpage2> createState() => _loginpage2State();
 }
 
-class _LoginPageState extends State<LoginPage> {
-
+class _loginpage2State extends State<loginpage2> {
   TextEditingController txtUsername = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
 
   GlobalKey<FormState> keyForm= GlobalKey<FormState>();
 
   bool isLoading = false;
-  Future<Login?> loginAccount() async{
+  Future<loginpage2?> loginAccount() async{
     //handle error
     try{
       setState(() {
         isLoading = true;
       });
 
-      http.Response response = await http.post(Uri.parse('http://192.168.43.109/edukasi_server/login.php'),
+      http.Response response = await http.post(Uri.parse('http://192.168.43.109/edukasi/login.php'),
           body: {
             "username": txtUsername.text,
             "password": txtPassword.text,
           }
       );
-      Login data = loginFromJson(response.body);
+      Login2 data = login2FromJson(response.body);
       //cek kondisi
       if(data.value == 1){
         //kondisi ketika berhasil
@@ -161,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context)
-            => PageRegister()
+            => register2()
             ));
           },
           child: Text('Anda belum punya account? Silkan Register'),

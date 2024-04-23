@@ -1,5 +1,7 @@
 import 'package:demouas/Model/Model_Register.dart';
+import 'package:demouas/Model/model_Add_Pegawai.dart';
 import 'package:demouas/Screen%20Page/Login_page.dart';
+import 'package:demouas/Screen%20Page/Page_Login2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -30,13 +32,13 @@ class _PageRegisterState extends State<PageRegister> {
         isLoading = true;
       });
 
-      http.Response response = await http.post(Uri.parse('http://192.168.1.185/edukasi_server/register.php'),
+      http.Response response = await http.post(Uri.parse('http://192.168.43.109/edukasi/register.php'),
           body: {
             "username": txtUsername.text,
             "password": txtPassword.text,
             "fullname": txtFullName.text,
             "email": txtEmail.text,
-            "email": txtEmail.text,
+            "nohp": txtNohp.text,
           }
       );
       Register data = registerFromJson(response.body);
@@ -145,6 +147,20 @@ class _PageRegisterState extends State<PageRegister> {
                   validator: (val){
                     return val!.isEmpty ? "tidak boleh kosong " : null;
                   },
+                  controller: txtNohp,
+                  obscureText: true,//biar password nya gak keliatan
+                  decoration: InputDecoration(
+                      hintText: 'Input nohp',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)
+                      )
+                  ),
+                ),
+                SizedBox(height: 8,),
+                TextFormField(
+                  validator: (val){
+                    return val!.isEmpty ? "tidak boleh kosong " : null;
+                  },
                   controller: txtPassword,
                   obscureText: true,//biar password nya gak keliatan
                   decoration: InputDecoration(
@@ -186,7 +202,7 @@ class _PageRegisterState extends State<PageRegister> {
           ),
           onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context)
-            => LoginPage()
+            => loginpage2()
             ));
           },
           child: Text('Anda sudah punya account? Silkan Login'),

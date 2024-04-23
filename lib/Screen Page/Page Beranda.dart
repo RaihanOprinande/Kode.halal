@@ -1,5 +1,7 @@
 import 'package:demouas/Screen%20Page/Bottom_Navigation_Page.dart';
 import 'package:demouas/Screen%20Page/List_Edukasi_Page.dart';
+import 'package:demouas/Screen%20Page/Login_page.dart';
+import 'package:demouas/Screen%20Page/Page_Login2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
@@ -26,12 +28,12 @@ class PageBeranda extends StatelessWidget {
               ),
               MaterialButton(onPressed: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context)
-                =>const PageBottomNavigationBar()
+                =>const loginpage2()
                 ));
               },
                 color: Colors.green,
                 textColor: Colors.white,
-                child: const Text('Edukasi',
+                child: const Text('Login',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12
